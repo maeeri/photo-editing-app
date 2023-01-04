@@ -5,7 +5,7 @@ interface Props {
 }
 
 const ShowArea = (props: Props) => {
-  return <Container className='show-area'>
+  return <Container>
     {props.imgUrls.map((url) => <Image className='generated-img' key={url} src={url} />)}
   </Container>
 }

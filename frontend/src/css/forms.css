@@ -1,6 +1,5 @@
 .img-form {
   max-width: 50em;
-  background-color: white;
   margin-top: 5em;
   padding: 3em;
 }
@@ -16,8 +15,19 @@
 
 .show-area {
   display: flex;
+  max-width: 50em;
+  margin-top: 2em;
+  margin-bottom: 5em;
+  
+}
+
+.box {
+    border: 1px solid rgb(36, 36, 36);
+    box-shadow: 1px 1px 8px black;
+    background-color: white;
 }
 
 .generated-img {
   display: inline-block;
+  margin: 2em;
 }

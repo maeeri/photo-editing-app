@@ -1,0 +1,15 @@
+.navlink {
+  color: white;
+  text-decoration: none;
+  font-size: large;
+  font-family:'Courier New', Courier, monospace;
+}
+
+.navlink:hover {
+  color: antiquewhite;
+  text-decoration: none;
+}
+
+.bar {
+    height: 5em;
+}
