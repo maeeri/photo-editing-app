@@ -2,7 +2,7 @@ const { Configuration, OpenAIApi } = require('openai')
 
 interface ImgProps {
   prompt: string
-  n: number
+  number: number
   size: 'small' | 'medium' | 'large'
 }
 
@@ -13,13 +13,17 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 const generateImage = async (req, res) => {
-  const { prompt, n, size }: ImgProps = req.body
+  const { prompt, number, size }: ImgProps = req.body
+
+  console.log(req.body)
 
   const imgSize =
     size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024'
 
   try {
-    const response = await openai.createImage({ prompt, n, size: imgSize })
+    const response = await openai.createImage({ prompt, n: number, size: imgSize })
+
+    console.log(response)
 
     const imgUrls = response.data.data.map((data) => data.url)
 
@@ -27,6 +31,7 @@ const generateImage = async (req, res) => {
       success: true,
       data: imgUrls,
     })
+    console.log(imgUrls)
   } catch (e) {
     res.status(400).json({
       success: false,

@@ -2,20 +2,26 @@ import { Container } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import ImageForm from './ImageForm'
 import { ImageFormValues, Size } from '../../types'
+import ShowArea from './ShowArea'
+import { generateImage } from '../../services/images'
 
 const GenerateImagePage = () => {
   const [imageUrls, setImageUrls] = useState([])
   const [prompt, setPrompt] = useState('')
   const [number, setNumber] = useState(1)
   const [size, setSize] = useState(Size.small)
+  console.log(imageUrls)
 
   useEffect(() => {}, [imageUrls])
 
   const onSubmit = async (event: any) => {
     event.preventDefault()
-    console.log(prompt, number, size)
+    
     const params: ImageFormValues = { prompt, number, size }
-    // const response = await generateImage(params)
+    const response = await generateImage(params)
+    setImageUrls(response)
+
+    console.log(response)
 
     setPrompt('')
     setNumber(1)
@@ -23,8 +29,8 @@ const GenerateImagePage = () => {
   }
 
   return (
-    <Container>
-      <h1>Generate image</h1>
+    <Container className="img-form">
+      <h1 className="img-head">Generate image</h1>
       <ImageForm
         onSubmit={onSubmit}
         number={number}
@@ -35,16 +41,7 @@ const GenerateImagePage = () => {
         setSize={setSize}
       />
       <div>
-        {imageUrls &&
-          imageUrls.length > 0 &&
-          imageUrls.map((url) => (
-            <img
-              style={{ display: 'inline-block' }}
-              key={url}
-              src={url}
-              alt="generated"
-            />
-          ))}
+        <ShowArea imgUrls={imageUrls} />
       </div>
     </Container>
   )

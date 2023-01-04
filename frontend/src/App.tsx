@@ -1,3 +1,4 @@
+import './css/style.css'
 import GenerateImagePage from './components/GenerateImagePage'
 
 function App() {
