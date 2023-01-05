@@ -1,7 +1,7 @@
 import './css/style.css'
-import GenerateImagePage from './components/GenerateImagePage'
+import GenerateImagePage from 'components/GenerateImagePage'
 import { Routes, Route } from 'react-router'
-import AppBar from './components/AppBar'
+import AppBar from 'components/AppBar'
 
 function App() {
   return (

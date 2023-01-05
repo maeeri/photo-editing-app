@@ -1,9 +1,9 @@
 import { Container } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import ImageForm from './ImageForm'
-import { ImageFormValues, Size } from '../../types'
+import { ImageFormValues, Size } from 'types'
 import ShowArea from './ShowArea'
-import { generateImage } from '../../services/images'
+import { generateImage } from 'services/images'
 
 const GenerateImagePage = () => {
   const [imageUrls, setImageUrls] = useState([

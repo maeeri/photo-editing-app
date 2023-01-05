@@ -1,4 +1,4 @@
-import { ImageFormValues, Size } from '../../types'
+import { ImageFormValues, Size } from 'types'
 import { Button, Form, Container } from 'react-bootstrap'
 
 interface Props extends ImageFormValues {

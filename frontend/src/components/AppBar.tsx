@@ -1,6 +1,6 @@
 import { Navbar, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import '../css/appbar.css'
+import 'css/appbar.css'
 
 const AppBar = () => {
   return (
