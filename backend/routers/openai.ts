@@ -1,8 +1,6 @@
-const express = require('express')
-const { generateImage } = require('../controllers/openaiController')
-
-const router = express.Router()
+const router = require('express').Router()
+import { generateImage } from '../controllers/openaiController'
 
 router.post('/generateimage', generateImage)
 
-export default router
+module.exports = router

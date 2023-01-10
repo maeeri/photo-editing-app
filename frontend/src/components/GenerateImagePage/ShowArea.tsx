@@ -5,9 +5,17 @@ interface Props {
 }
 
 const ShowArea = (props: Props) => {
-  return <Container>
-    {props.imgUrls.map((url) => <Image className='generated-img' key={url} src={url} />)}
-  </Container>
+  return (
+    <Container>
+      {props.imgUrls.map((url) => (
+        <span key={url} title="open in a new tab">
+          <a href={url} target="_blank" rel="noreferrer">
+            <Image alt="generated image" className="generated-img" src={url} />
+          </a>
+        </span>
+      ))}
+    </Container>
+  )
 }
 
 export default ShowArea

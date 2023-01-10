@@ -9,3 +9,14 @@ export enum Size {
   medium = 'medium',
   large = 'large',
 }
+
+export interface UserCreds {
+  username: string,
+  password: string
+}
+
+export interface User {
+  username: string,
+  id: string,
+  token: string
+}

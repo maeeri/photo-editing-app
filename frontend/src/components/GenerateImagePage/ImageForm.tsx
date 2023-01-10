@@ -12,17 +12,18 @@ const ImageForm = (props: Props) => {
   return (
     <Container>
       <Form>
-        <Form.Group className='form-group'>
-          <Form.Label>Describe the image you want to create</Form.Label>
+        <Form.Group className="form-group">
+          <Form.Label>describe the image you want to create</Form.Label>
           <div>
             <Form.Control
+              type="text"
               name="prompt"
               value={props.prompt}
               onChange={({ target }) => props.setPrompt(target.value)}
             />
           </div>
         </Form.Group>
-        <Form.Group className='form-group'>
+        <Form.Group className="form-group">
           <label>how many images do you want to generate?</label>
           <div>
             {[1, 2, 3, 4].map((v) => (
@@ -37,7 +38,7 @@ const ImageForm = (props: Props) => {
             ))}
           </div>
         </Form.Group>
-        <Form.Group className='form-group'>
+        <Form.Group className="form-group">
           <label>image size</label>{' '}
           {(Object.keys(Size) as Array<keyof typeof Size>).map((k) => (
             <Form.Check

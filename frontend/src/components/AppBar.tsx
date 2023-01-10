@@ -4,11 +4,29 @@ import 'css/appbar.css'
 
 const AppBar = () => {
   return (
-    <Navbar className='bar' bg="dark">
-      <Container>
-        <Container><Link className='navlink' to="/">home</Link></Container>
-        <Container><Link className='navlink' to="/generate">generate</Link></Container>
-      </Container>
+    <Navbar className="bar" bg="dark">
+      <div className='appbar-container'>
+        <div className='navitem'>
+          <Link className="navlink" to="/">
+            home
+          </Link>
+        </div>
+        <div className='navitem'>
+          <Link className="navlink" to="/generate">
+            generate
+          </Link>
+        </div>
+        <div className='navitem'>
+          <Link className="navlink" to="/edit">
+            edit
+          </Link>
+        </div>
+        <div className='navitem'>
+          <Link className="navlink" to="/signup">
+            sign in or up
+          </Link>
+        </div>
+      </div>
     </Navbar>
   )
 }

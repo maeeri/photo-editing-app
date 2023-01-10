@@ -1,10 +1,25 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1 fr auto;
+  grid-template-areas:
+    'header'
+    'form'
+    'show';
+  height: 100vh;
+  width: 100vw;
+}
+
 .img-form {
+  grid-area: form;
   max-width: 50em;
   margin-top: 5em;
+  margin-bottom: 5em;
   padding: 3em;
 }
 
 .img-head {
+  grid-area: header;
   text-align: center;
   margin-bottom: 2em;
 }
@@ -14,20 +29,30 @@
 }
 
 .show-area {
+  grid-area: show;
   display: flex;
   max-width: 50em;
   margin-top: 2em;
   margin-bottom: 5em;
-  
+  min-height: 5em;
 }
 
 .box {
-    border: 1px solid rgb(36, 36, 36);
-    box-shadow: 1px 1px 8px black;
-    background-color: white;
+  border: 1px solid rgb(36, 36, 36);
+  box-shadow: 1px 1px 8px black;
+  background-color: white;
 }
 
 .generated-img {
   display: inline-block;
+  margin: 0 auto;
+  max-width: 47em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding: 1em;
+}
+
+.edit-form {
   margin: 2em;
+  padding: 2em;
 }

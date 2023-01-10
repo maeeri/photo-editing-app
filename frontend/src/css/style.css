@@ -1,4 +1,14 @@
 body {
-  background-color: grey !important;
+  background-color: grey;
   font-family: 'Courier New', Courier, monospace !important;
+}
+
+.loader {
+  margin: 5em;
+  margin-left: 45% !important;
+}
+
+.colour-picker {
+  padding: 3em;
+  margin: 3em;
 }
