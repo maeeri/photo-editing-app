@@ -11,12 +11,17 @@ export enum Size {
 }
 
 export interface UserCreds {
-  username: string,
+  username: string
   password: string
 }
 
 export interface User {
-  username: string,
-  id: string,
-  token: string
+  username: string
+  id: string
+  name: string
+  role: string
+}
+
+export interface UploadImage {
+  image: Blob
 }

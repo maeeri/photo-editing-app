@@ -6,6 +6,7 @@ import 'css/signup.css'
 
 type Props = {
   user: User
+  setUser: (values: any) => void
 }
 
 const SignUpSignInPage = (props: Props) => {
@@ -37,11 +38,11 @@ const SignUpSignInPage = (props: Props) => {
           sign up
         </button>
       </div>
-      <div className="box signin show" id="signin">
-        <SignIn />
+      <div className="box signin hide" id="signin">
+        <SignIn setUser={props.setUser} />
       </div>
-      <div className="box signup show" id="signup">
-        <SignUp />
+      <div className="box signup hide" id="signup">
+        <SignUp setUser={props.setUser} />
       </div>
     </div>
   )

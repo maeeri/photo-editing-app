@@ -5,8 +5,7 @@ function ColourPicker() {
   const body = document.getElementById('body')
   const bg = window.localStorage.getItem('openaibg') || '#808080'
   const text = window.localStorage.getItem('openaitext') || '#000000'
-  console.log(bg, text)
-  console.log(body?.style.backgroundColor)
+
   const setBgColour = (colour: string) => {
     if (body) body.style.backgroundColor = colour
     window.localStorage.setItem('openaibg', colour)

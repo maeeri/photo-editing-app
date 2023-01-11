@@ -3,6 +3,14 @@ body {
   font-family: 'Courier New', Courier, monospace !important;
 }
 
+img {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px rgb(41, 37, 37));
+  width: auto;
+  height: auto;
+  margin: 1em;
+}
+
 .loader {
   margin: 5em;
   margin-left: 45% !important;

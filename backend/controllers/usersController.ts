@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const logger = require('../utils/logger')
-import bcrypt from 'bcryptjs'
+const bcrypt = require('bcryptjs')
 
 export const getAllUsers = async (req, res) => {
   const users = await User.find({})

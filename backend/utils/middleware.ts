@@ -42,4 +42,3 @@ const errorHandler = (error, request, response, next) => {
 }
 
 module.exports = { tokenExtractor, errorHandler, userExtractor }
-

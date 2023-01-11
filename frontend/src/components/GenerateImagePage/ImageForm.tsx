@@ -14,29 +14,26 @@ const ImageForm = (props: Props) => {
       <Form>
         <Form.Group className="form-group">
           <Form.Label>describe the image you want to create</Form.Label>
-          <div>
-            <Form.Control
-              type="text"
-              name="prompt"
-              value={props.prompt}
-              onChange={({ target }) => props.setPrompt(target.value)}
-            />
-          </div>
+          <Form.Control
+            style={{ maxWidth: '50vw' }}
+            type="text"
+            name="prompt"
+            value={props.prompt}
+            onChange={({ target }) => props.setPrompt(target.value)}
+          />
         </Form.Group>
         <Form.Group className="form-group">
           <label>how many images do you want to generate?</label>
-          <div>
-            {[1, 2, 3, 4].map((v) => (
-              <Form.Check
-                key={v}
-                type="radio"
-                name="number"
-                label={v}
-                checked={props.number === v}
-                onChange={() => props.setNumber(v)}
-              />
-            ))}
-          </div>
+          {[1, 2, 3, 4].map((v) => (
+            <Form.Check
+              key={v}
+              type="radio"
+              name="number"
+              label={v}
+              checked={props.number === v}
+              onChange={() => props.setNumber(v)}
+            />
+          ))}
         </Form.Group>
         <Form.Group className="form-group">
           <label>image size</label>{' '}

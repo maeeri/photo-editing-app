@@ -1,33 +1,39 @@
 import FileInputForm from './FileInputForm'
-import 'css/edit.css'
+import ImageList from './ImageList'
+import 'css/editor.css'
 import { useState } from 'react'
-import { getItem, createItem } from 'services/item'
+import itemService from 'services/item'
 
 type Props = {
   token: string
 }
 
 const EditmagePage = (props: Props) => {
-  const [item, setItem] = useState({})
-  const [image, setImage] = useState('')
-  const [title, setTitle] = useState('')
+  const [image, setImage] = useState(new Blob())
+  const [items, setItems] = useState([{ id: '', image: '' }])
+
+  let token = ''
+  const userFromLS = window.localStorage.getItem('openaiuser')
+  if (userFromLS) token = JSON.parse(userFromLS).token
 
   const onSubmit = async (event: any) => {
     event.preventDefault()
-    const result = await createItem({ title, image }, props.token)
-    setItem(result)
+    const reader = new FileReader()
+    reader.onloadend = async function () {
+      reader.result === 'data:'
+        ? window.alert('please choose a file before uploading')
+        : await itemService.createItem(reader.result, token)
+    }
+    reader.readAsDataURL(image)
+    setImage(new Blob())
+    setItems(await itemService.getItems(props.token))
   }
-  
+
   return (
-    <div className="container">
+    <div className="file-upload-container">
       <div className="box edit-form">
-        <FileInputForm
-          title={title}
-          setTitle={setTitle}
-          image={image}
-          setImage={setImage}
-          onSubmit={onSubmit}
-        />
+        <FileInputForm image={image} setImage={setImage} onSubmit={onSubmit} />
+        <ImageList items={items} setItems={setItems} />
       </div>
     </div>
   )

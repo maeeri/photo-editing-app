@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 let location = document.location
-const baseUrl = `${location.protocol}//${location.hostname}/api/users`
+const baseUrl = `${location.protocol}//${location.hostname}:5000/api/users`
 
 const setToken = (newToken: string) => {
   return `bearer ${newToken}`
@@ -28,7 +28,7 @@ const createUser = async (
   username: string,
   password: string,
   name: string,
-  role: string
+  role?: string
 ) => {
   const response = await axios.post(baseUrl, {
     username: username,
@@ -50,6 +50,6 @@ const editUserRole = async (id: string, role: string, newToken: string) => {
   return response.data
 }
 
-const userService = {getUsers, getOneUser, createUser, editUserRole}
+const userService = { getUsers, getOneUser, createUser, editUserRole }
 
 export default userService

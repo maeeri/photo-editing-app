@@ -1,8 +1,10 @@
-.navlink {
+.navlink, .nav-btn {
   color: white !important;
   text-decoration: none;
   font-size: large;
   font-family: 'Courier New', Courier, monospace;
+  background-color: inherit;
+  border: none;
 }
 
 .navlink:hover {
@@ -12,6 +14,22 @@
 
 .bar {
   height: 5em;
+  width: 150vw;
+  z-index: 100;
+}
+
+@media screen and (max-width: 990px) {
+  .navbar-collapse {
+    position: static;
+    background-color: rgb(41, 40, 40);
+    margin-top: 4.5em;
+  }
+}
+
+.navbar-toggler {
+  background-color: black;
+  position: top left;
+  position: fixed;
 }
 
 .appbar-container {
@@ -20,4 +38,8 @@
 
 .navitem {
   margin: 2em;
+}
+
+.navbar {
+  position: sticky !important;
 }

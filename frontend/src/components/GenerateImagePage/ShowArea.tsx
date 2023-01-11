@@ -1,4 +1,4 @@
-import { Container, Image } from 'react-bootstrap'
+import { Image } from 'react-bootstrap'
 
 interface Props {
   imgUrls: Array<string>
@@ -6,7 +6,7 @@ interface Props {
 
 const ShowArea = (props: Props) => {
   return (
-    <Container>
+    <div>
       {props.imgUrls.map((url) => (
         <span key={url} title="open in a new tab">
           <a href={url} target="_blank" rel="noreferrer">
@@ -14,7 +14,7 @@ const ShowArea = (props: Props) => {
           </a>
         </span>
       ))}
-    </Container>
+    </div>
   )
 }
 

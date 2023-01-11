@@ -1,7 +1,10 @@
 const router = require('express').Router()
-import { getItem, createItem } from "../controllers/itemController"
+const middleware = require('../utils/middleware')
+import { getItems, createItem, getOneItem, editItem } from '../controllers/itemController'
 
-router.get('/', getItem)
-router.post('/', createItem)
+router.get('/', middleware.userExtractor, getItems)
+router.get('/:id', middleware.userExtractor, getOneItem)
+router.post('/', middleware.userExtractor, createItem)
+router.put('/:id', middleware.userExtractor, editItem)
 
 module.exports = router

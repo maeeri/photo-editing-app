@@ -23,12 +23,12 @@ mongoose
   })
 
 const app = express()
+
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ limit: '30mb', extended: false }))
+app.use(express.urlencoded({ limit: '1000mb', extended: false }))
 
 app.use(middleware.tokenExtractor)
-app.use(middleware.userExtractor)
 
 app.use('/openai', openaiRouter)
 app.use('/api/users', usersRouter)

@@ -20,6 +20,12 @@ const userSchema = mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
+  items: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Item',
+    },
+  ],
 })
 
 userSchema.set('toJSON', {
