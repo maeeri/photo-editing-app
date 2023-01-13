@@ -14,6 +14,7 @@ type Props = {
 const ImageArea = (props: Props) => {
   const { item, style, resetOptions } = props
   const img = document.getElementById('img')
+
   const downloadImage = async () => {
     if (img) {
       const res = await htmlToImage.toPng(img)
@@ -23,10 +24,9 @@ const ImageArea = (props: Props) => {
 
   return (
     <>
-      <div className="main-img-container">
+      <div id="img" className="main-img-container">
         <img
           className="main-img"
-          id="img"
           src={item.image}
           alt="editable"
           style={style}

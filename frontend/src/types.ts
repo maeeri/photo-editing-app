@@ -25,3 +25,8 @@ export interface User {
 export interface UploadImage {
   image: Blob
 }
+
+export interface Point {
+  x: number,
+  y: number
+}
