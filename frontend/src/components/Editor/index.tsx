@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import itemService from 'services/item'
-import Slider from './Slider'
-import SideBarItem from './SideBarItem'
-import * as htmlToImage from 'html-to-image'
-import { fabric } from 'fabric'
-import FileSaver from 'file-saver'
+import Slider from 'components/Slider'
+import Sidebar from 'components/Sidebar'
+import Loader from 'components/Loader'
+import ImageArea from './ImageArea'
 
 type Props = {
   token: string
@@ -91,17 +90,22 @@ const Editor = (props: Props) => {
   const { id } = useParams()
 
   const selectedOption = options[selectedOptionsIndex]
-  const img = document.getElementById('img')
 
   useEffect(() => {
     const getItem = async () => {
-      if (typeof id === 'string') {
+      if (typeof id === 'string' && id !== '1') {
         const response = await itemService.getOneItem(id, props.token)
         setItem(response)
+      } else {
+        setItem({
+          id: '1',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Blank_Square.svg/768px-Blank_Square.svg.png',
+        })
       }
     }
     getItem()
-  }, [id, item.image])
+  }, [id, item.image, props.token])
 
   const resetOptions = () => {
     setOptions(DEFAULT_OPTIONS)
@@ -124,44 +128,21 @@ const Editor = (props: Props) => {
     return { filter: filters.join(' ') }
   }
 
-  const downloadImage = async () => {
-    if (img) {
-      const res = await htmlToImage.toBlob(img)
-      console.log(res)
-      if (res !== null) FileSaver.saveAs(res)
-    }
-  }
-
   return (
-    <div className="editor-container">
-      <div className="main-img-container">
-        <img
-          className="main-img"
-          id="img"
-          src={item.image}
-          alt="editable"
+    <div className="container editor-container">
+      {!item.image && <Loader show={true} />}
+      {item.image && (
+        <ImageArea
+          item={item}
           style={getImageStyle()}
+          resetOptions={resetOptions}
         />
-      </div>
-      <div className='open-img-btn'>
-        <button onClick={downloadImage}>
-        download image
-      </button>
-      <button onClick={resetOptions}>
-        reset
-      </button>
-      </div>
-      
-      <div className="sidebar">
-        {options.map((o, i) => (
-          <SideBarItem
-            key={i}
-            name={o.name}
-            active={i === selectedOptionsIndex}
-            handleClick={() => setSelectedOptionsIndex(i)}
-          />
-        ))}
-      </div>
+      )}
+      <Sidebar
+        options={options}
+        selectedOptionsIndex={selectedOptionsIndex}
+        setSelectedOptionsIndex={setSelectedOptionsIndex}
+      />
       <Slider
         min={selectedOption.range.min}
         max={selectedOption.range.max}

@@ -21,7 +21,7 @@ const SignUpSignInPage = (props: Props) => {
   }
 
   return (
-    <div className="container">
+    <div className="container signup-container">
       <div className="buttons">
         <button
           onClick={() => toggleVisibility(document.getElementById('signin'))}

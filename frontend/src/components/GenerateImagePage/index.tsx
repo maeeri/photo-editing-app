@@ -32,7 +32,7 @@ const GenerateImagePage = () => {
   }
 
   return (
-    <div className="generate-img-container">
+    <div className="generate-img-container container">
       <div className="box">
         <h1 className="img-head">Generate images</h1>
         <div className="img-form">

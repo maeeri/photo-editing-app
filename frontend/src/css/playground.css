@@ -1,0 +1,40 @@
+.playground-container {
+  grid-template-areas:
+    'editarea playground-sidebar'
+    'slider playground-sidebar';
+}
+
+.canvas-container {
+  background-color: rgb(170, 170, 170);
+  grid-area: editarea;
+  margin: 0 auto;
+  margin-top: 3em;
+}
+
+.draw-canvas {
+  border: 1px solid black;
+  background-color: rgb(238, 238, 238);
+}
+
+.playground,
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas-container,
+.draw-canvas {
+  object-fit: contain;
+  max-width: 74vw;
+  max-height: 74vh;
+}
+
+.playground-sidebar {
+  grid-area: playground-sidebar;
+  background-color: black;
+  height: 100vh;
+  position: sticky;
+  margin-right: 0;
+  padding-right: 0;
+}

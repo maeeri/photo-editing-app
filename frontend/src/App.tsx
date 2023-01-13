@@ -3,11 +3,12 @@ import GenerateImagePage from 'components/GenerateImagePage'
 import { Routes, Route, useNavigate } from 'react-router'
 import AppBar from 'components/AppBar'
 import HomePage from 'components/HomePage'
-import { useEffect, useState, Fragment } from 'react'
-import EditmagePage from 'components/EditImagePage'
+import { useEffect, useState } from 'react'
+import UploadImagePage from 'components/UploadImagePage'
 import SignUpSignInPage from 'components/SignUpSignInPage'
-import Editor from 'components/EditImagePage/Editor'
+import Editor from 'components/Editor'
 import userService from 'services/user'
+import Playground from 'components/Playground'
 
 function App() {
   const [background, setBackground] = useState('')
@@ -69,7 +70,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="app">
       <AppBar user={user} signout={signout} />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -79,11 +80,12 @@ function App() {
         />
         {user.id && <Route path="/generate" element={<GenerateImagePage />} />}
         {user.id && (
-          <Route path="/edit" element={<EditmagePage token={token} />} />
+          <Route path="/edit" element={<UploadImagePage token={token} />} />
         )}
         {user.id && (
           <Route path="/edit/:id" element={<Editor token={token} />} />
         )}
+        {user.id && <Route path="/playground" element={<Playground />} />}
       </Routes>
     </div>
   )

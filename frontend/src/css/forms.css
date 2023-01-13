@@ -1,13 +1,8 @@
 .generate-img-container {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1 fr auto;
   grid-template-areas:
     'header'
     'form'
     'showimg';
-  height: 100vh;
-  width: 100vw;
 }
 
 .img-form {
@@ -15,8 +10,6 @@
   margin-top: 5em;
   margin-bottom: 5em;
   width: 60vw;
-  /* padding: 1em; */
-  /* max-height: 50vh; */
 }
 
 .img-head {
@@ -29,21 +22,11 @@
   margin-bottom: 1em;
 }
 
-.box {
-  border: 1px solid rgb(36, 36, 36);
-  box-shadow: 1px 1px 8px black;
-  background-color: white;
-  max-width: 80vw;
-  margin: 0 auto;
-  margin-top: 3em;
-  padding: 2em;
-}
-
 .show-area {
   grid-area: showimg;
   margin-bottom: 5em;
   height: fit-content;
-  width: 78vw;
+  width: 60vw;
 }
 
 .generated-img {
@@ -56,12 +39,3 @@
   width: 100%;
 }
 
-.edit-form {
-  margin: 2em;
-  padding: 2em;
-}
-
-.list-img {
-  max-width: 100px;
-  max-height: 100px;
-}

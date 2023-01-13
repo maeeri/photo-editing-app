@@ -26,7 +26,6 @@ export const getOneItem = async (req, res) => {
 
 export const createItem = async (req, res) => {
   const item = new Item(req.body)
-  const token = req.token
 
   const user = req.user
   item.user = user

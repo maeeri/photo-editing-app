@@ -22,8 +22,9 @@ const AppBar = (props: Props) => {
       className="bar"
       bg="dark"
       variant="dark"
+      sticky="top"
     >
-      <Navbar.Toggle aria-controls="reaponsive-navbar-nav" />
+      <Navbar.Toggle className='navbar-toggler' aria-controls="reaponsive-navbar-nav" />
       <div className="appbar-container">
         <Navbar.Collapse id="responsive-navbar-nav">
           <div className="navitem">
@@ -50,6 +51,13 @@ const AppBar = (props: Props) => {
             <div className="navitem">
               <Link className="navlink" to="/edit">
                 edit
+              </Link>
+            </div>
+          )}
+          {user.id && (
+            <div className="navitem">
+              <Link className="navlink" to="/playground">
+                playground
               </Link>
             </div>
           )}

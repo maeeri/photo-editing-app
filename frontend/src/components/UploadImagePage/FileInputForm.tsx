@@ -14,7 +14,7 @@ const FileInputForm = (props: Props) => {
   return (
     <Form onSubmit={props.onSubmit}>
       <Form.Group controlId="formFileSm" className="mb-3">
-        <Form.Label>upload an image</Form.Label>
+        <Form.Label><h4 className='title'>upload an image</h4></Form.Label>
         <Form.Control type="file" onChange={handleImageChange} />
       </Form.Group>
       <Button type="submit">upload</Button>

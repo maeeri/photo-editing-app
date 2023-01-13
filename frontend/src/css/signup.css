@@ -2,16 +2,11 @@
   margin: 1em;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1 fr auto;
+.signup-container {
   grid-template-areas:
     'buttons'
     'signin'
     'signup';
-  height: 100vh;
-  width: 100vw;
 }
 
 .buttons {
@@ -41,4 +36,8 @@
 
 .show {
   display: block;
+}
+
+.submit-btn {
+  margin-top: 1em;
 }

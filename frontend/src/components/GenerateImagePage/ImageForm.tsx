@@ -1,5 +1,5 @@
 import { ImageFormValues, Size } from 'types'
-import { Button, Form, Container } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 
 interface Props extends ImageFormValues {
   onSubmit: (event: any) => void
@@ -10,7 +10,7 @@ interface Props extends ImageFormValues {
 
 const ImageForm = (props: Props) => {
   return (
-    <Container>
+    <div>
       <Form>
         <Form.Group className="form-group">
           <Form.Label>describe the image you want to create</Form.Label>
@@ -50,7 +50,7 @@ const ImageForm = (props: Props) => {
         </Form.Group>
         <Button onClick={(event) => props.onSubmit(event)}>generate</Button>
       </Form>
-    </Container>
+    </div>
   )
 }
 

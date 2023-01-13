@@ -16,8 +16,6 @@ const openai = new OpenAIApi(configuration)
 export const generateImage = async (req, res) => {
   const { prompt, number, size }: ImgProps = req.body
 
-  log.info(req.body)
-
   const imgSize =
     size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024'
 
@@ -27,8 +25,6 @@ export const generateImage = async (req, res) => {
       n: number,
       size: imgSize,
     })
-
-    log.info(response)
 
     const imgUrls = response.data.data.map((data) => data.url)
 

@@ -1,4 +1,4 @@
-import { Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useState } from 'react'
 import loginService from 'services/login'
 import { useNavigate } from 'react-router'
@@ -15,8 +15,6 @@ const SignIn = (props: Props) => {
   const onSubmit = async (e: any) => {
     e.preventDefault()
     const res = await loginService.login({ username, password })
-
-    console.log(res)
 
     props.setUser(res)
     window.localStorage.setItem('openaiuser', JSON.stringify(res))
@@ -46,9 +44,9 @@ const SignIn = (props: Props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button className="submit-btn" type="submit">
+        <button className="submit-btn" type="submit">
           sign in
-        </Button>
+        </button>
       </Form>
     </div>
   )

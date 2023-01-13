@@ -14,7 +14,7 @@
 
 .bar {
   height: 5em;
-  width: 150vw;
+  width: 100vw;
   z-index: 100;
 }
 
@@ -22,12 +22,13 @@
   .navbar-collapse {
     position: static;
     background-color: rgb(41, 40, 40);
-    margin-top: 4.5em;
+    margin-top: 4.45em;
   }
 }
 
 .navbar-toggler {
   background-color: black;
+  margin: 1em;
   position: top left;
   position: fixed;
 }
@@ -43,3 +44,5 @@
 .navbar {
   position: sticky !important;
 }
+
+

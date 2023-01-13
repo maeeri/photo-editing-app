@@ -8,7 +8,7 @@ type Props = {
   token: string
 }
 
-const EditmagePage = (props: Props) => {
+const UploadImagePage = (props: Props) => {
   const [image, setImage] = useState(new Blob())
   const [items, setItems] = useState([{ id: '', image: '' }])
 
@@ -39,4 +39,4 @@ const EditmagePage = (props: Props) => {
   )
 }
 
-export default EditmagePage
+export default UploadImagePage

@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap'
 import { Watch } from 'react-loader-spinner'
 
 type Props = {
@@ -8,16 +7,18 @@ type Props = {
 const Loader = ({ show }: Props) => {
   const style = { display: show ? 'inline-block' : 'none' }
   return (
-    <Container style={style} className="loader">
-      <Watch
-        height="80"
-        width="80"
-        radius="48"
-        color="#4fa94d"
-        ariaLabel="watch-loading"
-        wrapperStyle={{}}
-      />
-    </Container>
+    <div id="overlay" style={style}>
+      <div id="loader">
+        <Watch
+          height="80"
+          width="80"
+          radius="48"
+          color="#4fa94d"
+          ariaLabel="watch-loading"
+          wrapperStyle={{}}
+        />
+      </div>
+    </div>
   )
 }
 

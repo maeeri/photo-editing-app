@@ -1,5 +1,4 @@
 import { Form } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
 import { useState } from 'react'
 import userService from 'services/user'
 
@@ -54,9 +53,9 @@ const SignUp = (props: Props) => {
             onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
-        <Button className="submit-btn" type="submit">
+        <button className="submit-btn" type="submit">
           sign up
-        </Button>
+        </button>
       </Form>
     </div>
   )
