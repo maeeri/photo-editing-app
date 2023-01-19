@@ -1,8 +1,22 @@
+.image-list-container {
+  margin-top: 1em;
+}
+
 .image-list {
   margin-top: 3em;
+  display: flex;
 }
 
 .list-img {
   max-width: 200px;
   max-height: 200px;
+  display: inline-block;
+}
+
+.image-link-container {
+  display: flex;
+}
+
+.icon {
+  margin: 1em 0;
 }

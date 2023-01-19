@@ -20,7 +20,6 @@ function ColourPicker() {
     window.localStorage.removeItem('openaibg')
     window.localStorage.removeItem('openaitext')
     if (body) {
-      console.log(body.style.color)
       body.style.backgroundColor = 'grey'
       body.style.color = 'black'
     }

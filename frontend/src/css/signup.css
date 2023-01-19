@@ -5,8 +5,8 @@
 .signup-container {
   grid-template-areas:
     'buttons'
-    'signin'
-    'signup';
+    'forms';
+  grid-template-rows: auto !important;
 }
 
 .buttons {
@@ -15,19 +15,16 @@
   margin-top: 2em;
 }
 
-.signin {
-  grid-area: signin;
-}
-
-.signup {
-  grid-area: signup;
+.form-container {
+  grid-area: forms;
 }
 
 .signin,
 .signup {
-  margin: 2em;
+  margin: 0 auto 2em;
   padding: 2em;
   border-radius: 3px;
+  position: top;
 }
 
 .hide {

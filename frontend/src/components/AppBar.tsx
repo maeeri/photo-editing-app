@@ -15,6 +15,8 @@ type Props = {
 const AppBar = (props: Props) => {
   const { user, signout } = props
 
+  const style = {width: window.innerWidth}
+
   return (
     <Navbar
       collapseOnSelect
@@ -23,6 +25,7 @@ const AppBar = (props: Props) => {
       bg="dark"
       variant="dark"
       sticky="top"
+      style={style}
     >
       <Navbar.Toggle className='navbar-toggler' aria-controls="reaponsive-navbar-nav" />
       <div className="appbar-container">

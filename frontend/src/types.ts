@@ -5,9 +5,15 @@ export interface ImageFormValues {
 }
 
 export enum Size {
-  small = 'small',
-  medium = 'medium',
-  large = 'large',
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+}
+
+export enum EditMode {
+  Draw = 'draw',
+  Erase = 'erase',
+  Select = 'select',
 }
 
 export interface UserCreds {
@@ -27,6 +33,17 @@ export interface UploadImage {
 }
 
 export interface Point {
-  x: number,
+  x: number
   y: number
+}
+
+export interface ModalProps {
+  show: boolean
+  setShow: (value: boolean) => void
+}
+
+export interface StrokeStyle {
+  strokeWidth: number
+  colour: string
+  mode: EditMode
 }

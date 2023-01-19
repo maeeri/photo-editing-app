@@ -3,6 +3,7 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import 'css/forms.css'
 import 'css/signup.css'
+import VisibilityToggler from 'components/VisibilityToggler'
 
 type Props = {
   user: User
@@ -10,39 +11,29 @@ type Props = {
 }
 
 const SignUpSignInPage = (props: Props) => {
-  const toggleVisibility = (element: any) => {
-    if (element && element.classList.value.includes('hide')) {
-      element.classList.remove('hide')
-      element.classList.add('show')
-    } else if (element) {
-      element.classList.remove('show')
-      element.classList.add('hide')
-    }
-  }
-
   return (
     <div className="container signup-container">
       <div className="buttons">
-        <button
-          onClick={() => toggleVisibility(document.getElementById('signin'))}
+        <VisibilityToggler
+          elementToShow={document.getElementById('signin') as HTMLElement}
+          elementToHide={document.getElementById('signup') as HTMLElement}
           id="signin-button"
-          className="button"
-        >
-          sign in
-        </button>
-        <button
-          onClick={() => toggleVisibility(document.getElementById('signup'))}
+          label="sign in"
+        />
+        <VisibilityToggler
+          elementToShow={document.getElementById('signup') as HTMLElement}
+          elementToHide={document.getElementById('signin') as HTMLElement}
           id="signup-button"
-          className="button"
-        >
-          sign up
-        </button>
+          label="sign up"
+        />
       </div>
-      <div className="box signin hide" id="signin">
-        <SignIn setUser={props.setUser} />
-      </div>
-      <div className="box signup hide" id="signup">
-        <SignUp setUser={props.setUser} />
+      <div className="form-container">
+        <div className="box signin hide" id="signin">
+          <SignIn setUser={props.setUser} />
+        </div>
+        <div className="box signup hide" id="signup">
+          <SignUp setUser={props.setUser} />
+        </div>
       </div>
     </div>
   )

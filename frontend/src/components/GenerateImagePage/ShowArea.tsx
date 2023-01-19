@@ -1,18 +1,17 @@
-import { Image } from 'react-bootstrap'
+import GeneratedImage from './GeneratedImage'
 
 interface Props {
   imgUrls: Array<string>
+  token: string
+  saveImageToDb: (img: any, width: number, height: number) => void
 }
 
 const ShowArea = (props: Props) => {
+  const { imgUrls, token, saveImageToDb } = props
   return (
     <div>
-      {props.imgUrls.map((url) => (
-        <span key={url} title="open in a new tab">
-          <a href={url} target="_blank" rel="noreferrer">
-            <Image alt="generated image" className="generated-img" src={url} />
-          </a>
-        </span>
+      {imgUrls.map((url, i) => (
+        <GeneratedImage key={i} imageUrl={url} index={i} token={token} saveImageToDb={saveImageToDb} />
       ))}
     </div>
   )

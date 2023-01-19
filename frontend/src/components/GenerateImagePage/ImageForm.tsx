@@ -43,7 +43,7 @@ const ImageForm = (props: Props) => {
               type="radio"
               name="size"
               label={k}
-              checked={props.size === k}
+              checked={props.size === Size[k]}
               onChange={() => props.setSize(Size[k])}
             />
           ))}

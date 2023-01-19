@@ -9,6 +9,7 @@ import SignUpSignInPage from 'components/SignUpSignInPage'
 import Editor from 'components/Editor'
 import userService from 'services/user'
 import Playground from 'components/Playground'
+import itemService from 'services/item'
 
 function App() {
   const [background, setBackground] = useState('')
@@ -69,6 +70,22 @@ function App() {
     navigate('/')
   }
 
+  const saveImageToDatabase = async (
+    img: any,
+    width: number,
+    height: number
+  ) => {
+    const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+    var ctx = canvas.getContext('2d')
+    ctx?.drawImage(img, 0, 0, width, height)
+    console.log(canvas)
+    const dataUrl = canvas.toDataURL()
+
+    await itemService.createItem(dataUrl, token)
+  }
+
   return (
     <div className="app">
       <AppBar user={user} signout={signout} />
@@ -78,9 +95,27 @@ function App() {
           path="/signup"
           element={<SignUpSignInPage user={user} setUser={setUser} />}
         />
-        {user.id && <Route path="/generate" element={<GenerateImagePage />} />}
         {user.id && (
-          <Route path="/edit" element={<UploadImagePage token={token} />} />
+          <Route
+            path="/generate"
+            element={
+              <GenerateImagePage
+                token={token}
+                saveImageToDb={saveImageToDatabase}
+              />
+            }
+          />
+        )}
+        {user.id && (
+          <Route
+            path="/edit"
+            element={
+              <UploadImagePage
+                token={token}
+                saveImageToDb={saveImageToDatabase}
+              />
+            }
+          />
         )}
         {user.id && (
           <Route path="/edit/:id" element={<Editor token={token} />} />

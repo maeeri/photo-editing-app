@@ -1,19 +1,13 @@
 .playground-container {
   grid-template-areas:
     'editarea playground-sidebar'
-    'slider playground-sidebar';
+    'slider playground-sidebar'
+    'buttons playground-sidebar';
 }
 
 .canvas-container {
   grid-area: editarea;
-  margin: 0 auto;
-  margin-top: 3em;
-}
-
-.draw-canvas {
-  border: 1px solid black;
-  background-color: rgb(255, 255, 255);
-  object-fit: contain;
+  margin: 3em auto;
 }
 
 .playground {
@@ -24,9 +18,63 @@
 
 .playground-sidebar {
   grid-area: playground-sidebar;
-  background-color: black;
   height: 100vh;
   position: sticky;
   margin-right: 0;
   padding-right: 0;
 }
+
+.modal {
+  position: relative;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.modal-content {
+  padding: 2em;
+}
+
+.playground-buttons {
+  grid-area: buttons;
+  margin: 1em auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playground-btn {
+  margin: 0 1em;
+}
+
+.canvas-image {
+  max-width: 600px;
+  max-height: 600px;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#canvas-area {
+  margin: 0;
+  box-shadow: 1px 1px 8px rgb(32, 32, 32);
+}
+
+#canvas-background {
+  background-image: linear-gradient(45deg, #808080 25%, transparent 25%),
+    linear-gradient(-45deg, #808080 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #808080 75%),
+    linear-gradient(-45deg, transparent 75%, #808080 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  padding: 0;
+  height: fit-content;
+  width: fit-content;
+}
+
+/* 
+@media screen and (max-width: 700px) {
+  .playground-sidebar {
+    margin-right: -4px;
+    padding-right: 0;
+  }
+} */

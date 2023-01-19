@@ -40,6 +40,11 @@ const editItem = async (id: string, img: any, token: string) => {
   return data
 }
 
-const itemService = { getItems, getOneItem, createItem, editItem }
+const deleteItem = async (id: string, token: string) => {
+  const response = await axios.delete(`${baseUrl}/${id}`, setConfig(token))
+  return response
+}
+
+const itemService = { getItems, getOneItem, createItem, editItem, deleteItem }
 
 export default itemService

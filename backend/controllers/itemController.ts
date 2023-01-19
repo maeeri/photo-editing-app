@@ -40,8 +40,7 @@ export const createItem = async (req, res) => {
 
 export const editItem = async (req, res) => {
   const { image } = req.body
-  const id = req.params.id
-  const item = await Item.findById(id)
+  const item = await Item.findById(req.params.id)
   const user = req.user
 
   if (user.id.toString() === item.user.toString()) {
@@ -54,4 +53,18 @@ export const editItem = async (req, res) => {
   } else {
     res.status(401).end()
   }
+}
+
+export const deleteItem = async (req, res) => {
+  const itemToBeDeleted = await Item.findById(req.params.id)
+  const user = req.user
+
+  if (!itemToBeDeleted) res.status(404).end()
+
+  if (!user || user.id.toString() !== itemToBeDeleted.user.toString()) {
+    res.status(401).end()
+  }
+
+  await Item.deleteOne(itemToBeDeleted)
+  res.status(204).end()
 }

@@ -5,12 +5,18 @@ import ShowArea from './ShowArea'
 import Loader from 'components/Loader'
 import imagesService from 'services/images'
 
-const GenerateImagePage = () => {
+type Props = {
+  token: string
+  saveImageToDb: (img: any, width: number, height: number) => void
+}
+
+const GenerateImagePage = (props: Props) => {
   const [imageUrls, setImageUrls] = useState([])
   const [prompt, setPrompt] = useState('')
   const [number, setNumber] = useState(1)
-  const [size, setSize] = useState(Size.small)
+  const [size, setSize] = useState(Size.Small)
   const [showSpinner, setShowSpinner] = useState(false)
+  const { token, saveImageToDb } = props
 
   useEffect(() => {}, [imageUrls, showSpinner])
 
@@ -27,7 +33,7 @@ const GenerateImagePage = () => {
 
       setPrompt('')
       setNumber(1)
-      setSize(Size.small)
+      setSize(Size.Small)
     }
   }
 
@@ -49,7 +55,13 @@ const GenerateImagePage = () => {
       </div>
       <div className="show-area box">
         <Loader show={showSpinner} />
-        {!showSpinner && <ShowArea imgUrls={imageUrls} />}
+        {!showSpinner && (
+          <ShowArea
+            imgUrls={imageUrls}
+            token={token}
+            saveImageToDb={saveImageToDb}
+          />
+        )}
       </div>
     </div>
   )

@@ -139,7 +139,7 @@ const Editor = (props: Props) => {
         />
       )}
       <Sidebar
-        options={options}
+        options={options.map(o => o.name)}
         selectedOptionsIndex={selectedOptionsIndex}
         setSelectedOptionsIndex={setSelectedOptionsIndex}
       />
