@@ -13,7 +13,7 @@
     
     
     
-    ### Resources 
-        https://github.com/R4M5E5/Video-Tutorial-Code-React-Drawing-App
-        https://www.youtube.com/watch?v=wCwKkT1P7vY&ab_channel=BananaCoding
-        https://www.youtube.com/watch?v=VHIEhgLS7uE&ab_channel=WebDevNinja
+### Resources 
+    https://github.com/R4M5E5/Video-Tutorial-Code-React-Drawing-App
+    https://www.youtube.com/watch?v=wCwKkT1P7vY&ab_channel=BananaCoding
+    https://www.youtube.com/watch?v=VHIEhgLS7uE&ab_channel=WebDevNinja
