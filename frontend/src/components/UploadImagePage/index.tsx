@@ -2,7 +2,7 @@ import FileInputForm from './FileInputForm'
 import ImageList from './ImageList'
 import 'css/editor.css'
 import { useState } from 'react'
-import itemService from 'services/item'
+import { useItemService } from 'hooks/useServer'
 
 type Props = {
   token: string
@@ -13,6 +13,7 @@ const UploadImagePage = (props: Props) => {
   const [image, setImage] = useState(new Blob())
   const [items, setItems] = useState([{ id: '', image: '' }])
   const {token, saveImageToDb} = props
+  const [itemService] = useItemService()
 
   const onSubmit = async (event: any) => {
     event.preventDefault()

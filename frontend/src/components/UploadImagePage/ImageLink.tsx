@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import itemService from 'services/item'
+import { useItemService } from 'hooks/useServer'
 import * as Icon from 'react-bootstrap-icons'
 
 type Props = {
@@ -13,17 +13,19 @@ type Props = {
 const ImageLink = (props: Props) => {
   const { item, token } = props
 
+  const [itemService] = useItemService()
+
   const removeItem = async () => {
     if (window.confirm('Are you sure you want to delete this image?'))
       await itemService.deleteItem(item.id, token)
   }
 
   return (
-    <div className='image-link-container'>
+    <div className="image-link-container">
       <Link to={`/edit/${item.id}`}>
         <img className="list-img" alt="gen" src={item.image} />
       </Link>
-      <Icon.Trash className='icon' onClick={removeItem} />
+      <Icon.Trash className="icon" onClick={removeItem} />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import Loader from 'components/Loader'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import itemService from 'services/item'
+import { useItemService } from 'hooks/useServer'
 import 'css/imageList.css'
 import ImageLink from './ImageLink'
 
@@ -25,6 +24,7 @@ const ImageList = (props: Props) => {
   const user = window.localStorage.getItem('openaiuser')
   const token = user ? JSON.parse(user).token : null
   const { items, setItems } = props
+  const [itemService] = useItemService()
 
   useEffect(() => {
     async function getItems() {

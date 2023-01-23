@@ -16,7 +16,7 @@ const Canvas = (props: Props) => {
   return (
     <canvas
       className="show"
-      id="canvas-area"
+      id={id}
       onMouseDown={onMouseDown}
       ref={setCanvasRef}
     />

@@ -1,4 +1,3 @@
-import itemService from 'services/item'
 import { Image } from 'react-bootstrap'
 
 type Props = {
@@ -16,7 +15,7 @@ interface ImageHtml extends HTMLElement {
 }
 
 const GeneratedImage = (props: Props) => {
-  const { imageUrl, index, token, saveImageToDb } = props
+  const { imageUrl, index } = props
   const idString = `list-img-${index}`
 
   const saveImage = async () => {

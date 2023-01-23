@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap'
 import { useState } from 'react'
-import userService from 'services/user'
+import { useUserService } from 'hooks/useServer'
 
 type Props = {
   setUser: (values: any) => void
@@ -10,6 +10,7 @@ const SignUp = (props: Props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [userService] = useUserService()
 
   const onSubmit = async (e: any) => {
     e.preventDefault()

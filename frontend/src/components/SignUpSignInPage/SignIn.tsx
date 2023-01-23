@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap'
 import { useState } from 'react'
-import loginService from 'services/login'
+import { useLoginService } from 'hooks/useServer'
 import { useNavigate } from 'react-router'
 
 type Props = {
@@ -11,6 +11,7 @@ const SignIn = (props: Props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const [loginService] = useLoginService()
 
   const onSubmit = async (e: any) => {
     e.preventDefault()

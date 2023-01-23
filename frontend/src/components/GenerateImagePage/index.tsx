@@ -3,7 +3,7 @@ import ImageForm from './ImageForm'
 import { ImageFormValues, Size } from 'types'
 import ShowArea from './ShowArea'
 import Loader from 'components/Loader'
-import imagesService from 'services/images'
+import { useOpenAI } from 'hooks/useOpenAI'
 
 type Props = {
   token: string
@@ -17,6 +17,8 @@ const GenerateImagePage = (props: Props) => {
   const [size, setSize] = useState(Size.Small)
   const [showSpinner, setShowSpinner] = useState(false)
   const { token, saveImageToDb } = props
+
+  const [imagesService] = useOpenAI()
 
   useEffect(() => {}, [imageUrls, showSpinner])
 

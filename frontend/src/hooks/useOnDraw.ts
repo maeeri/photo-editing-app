@@ -13,20 +13,16 @@ export const useOnDraw = (
   const mouseUpListenerRef = useRef<Function | null | any>(null)
   const endDrawListenerRef = useRef<Function | null | any>(null)
 
-  const touchDownListenerRef = useRef<Function | null | any>(null)
+  const touchStartListenerRef = useRef<Function | null | any>(null)
   const touchEndListenerRef = useRef<Function | null | any>(null)
   const touchMoveListenerRef = useRef<Function | null | any>(null)
 
   useEffect(() => {
-    const ctx = canvasRef.current?.getContext('2d', {
-      willReadFrequently: true,
-    }) as CanvasRenderingContext2D
+    const ctx = canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
 
     initMouseMoveListener(ctx)
-    initMouseUpListener()
     initTouchStartListener(ctx)
     initTouchMoveListener(ctx)
-    initTouchEndListener()
     initEndDrawListener(ctx)
 
     return () => {
@@ -41,7 +37,7 @@ export const useOnDraw = (
     if (mouseUpListenerRef.current) {
       window.removeEventListener('mouseup', mouseUpListenerRef.current)
     }
-    if (touchDownListenerRef.current) {
+    if (touchStartListenerRef.current) {
       window.removeEventListener('touchdown', mouseUpListenerRef.current)
     }
     if (touchMoveListenerRef.current) {
@@ -67,22 +63,15 @@ export const useOnDraw = (
     window.addEventListener('mousemove', mouseMoveListener)
   }
 
-  const initMouseUpListener = () => {
-    if (!canvasRef.current) return
-    const listener = () => {
-      isDrawingRef.current = false
-      prevPointRef.current = null
-    }
-    mouseUpListenerRef.current = listener
-    window.addEventListener('mouseup', listener)
-  }
-
   const initEndDrawListener = (ctx: CanvasRenderingContext2D) => {
     const listener = () => {
       onEndDraw(ctx)
+      isDrawingRef.current = false
+      prevPointRef.current = null
     }
     endDrawListenerRef.current = listener
     canvasRef.current?.addEventListener('mouseup', listener)
+    canvasRef.current?.addEventListener('touchend', listener)
   }
 
   const initTouchStartListener = (ctx: CanvasRenderingContext2D) => {
@@ -90,40 +79,35 @@ export const useOnDraw = (
       if (isDrawingRef && ctx) {
         e.preventDefault()
         isDrawingRef.current = true
-        // ctx.beginPath()
-        const { x, y } = computePointInCanvas(e.clientX, e.clientY) as Point
-        ctx.moveTo(x, y)
-      }
-    }
-    touchStartListener.current = touchStartListener
-    canvasRef.current?.addEventListener('touchstart', touchStartListener, false)
-  }
-
-  //does not yet work, prevPointRef has issues, seems to be setting itself to current point before onDraw
-  const initTouchMoveListener = (ctx: CanvasRenderingContext2D) => {
-    const touchMoveListener = (e: any) => {
-      if (isDrawingRef.current) {
         const point = computePointInCanvas(
           e.touches[0].clientX,
           e.touches[0].clientY
-        ) as Point
-
+        )
         if (onDraw) onDraw(ctx, point, prevPointRef.current)
         prevPointRef.current = point
       }
     }
-    touchMoveListenerRef.current = touchMoveListener
-    window.addEventListener('touchmove', touchMoveListener, false)
+    touchStartListenerRef.current = touchStartListener
+    canvasRef.current?.addEventListener('touchstart', touchStartListener, false)
   }
 
-  const initTouchEndListener = () => {
-    if (!canvasRef.current) return
-    const listener = () => {
-      isDrawingRef.current = false
-      prevPointRef.current = null
+  const initTouchMoveListener = (ctx: CanvasRenderingContext2D) => {
+    const listener = (e: any) => {
+      e.preventDefault()
+      const touches = Object.values(e.touches)
+      touches.forEach((touch: any) => {
+        const point = computePointInCanvas(
+          touch.clientX,
+          touch.clientY
+        ) as Point
+        if (isDrawingRef.current) {
+          if (onDraw) onDraw(ctx, point, prevPointRef.current)
+        }
+        prevPointRef.current = point
+      })
     }
-    touchEndListenerRef.current = listener
-    window.addEventListener('touchend', listener)
+    touchMoveListenerRef.current = listener
+    canvasRef.current?.addEventListener('touchmove', listener)
   }
 
   const computePointInCanvas = (

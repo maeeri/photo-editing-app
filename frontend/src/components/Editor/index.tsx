@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import itemService from 'services/item'
 import Slider from 'components/Slider'
 import Sidebar from 'components/Sidebar'
 import Loader from 'components/Loader'
 import ImageArea from './ImageArea'
+import { useItemService } from 'hooks/useServer'
 
 type Props = {
   token: string
@@ -89,6 +89,8 @@ const Editor = (props: Props) => {
   const [selectedOptionsIndex, setSelectedOptionsIndex] = useState(0)
   const { id } = useParams()
 
+  const [itemService] = useItemService()
+
   const selectedOption = options[selectedOptionsIndex]
 
   useEffect(() => {
@@ -139,7 +141,7 @@ const Editor = (props: Props) => {
         />
       )}
       <Sidebar
-        options={options.map(o => o.name)}
+        options={options.map((o) => o.name)}
         selectedOptionsIndex={selectedOptionsIndex}
         setSelectedOptionsIndex={setSelectedOptionsIndex}
       />

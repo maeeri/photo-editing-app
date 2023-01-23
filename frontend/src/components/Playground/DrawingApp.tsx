@@ -5,7 +5,6 @@ import { EditMode, Point, StrokeStyle } from 'types'
 import * as htmlToImage from 'html-to-image'
 import FileSaver from 'file-saver'
 import Canvas from './Canvas'
-import VisibilityToggler from 'components/VisibilityToggler'
 
 type Props = {
   strokeStyle: StrokeStyle
@@ -17,16 +16,26 @@ const DrawingApp = (props: Props) => {
   const [restoreArray, setRestoreArray] = useState<ImageData[]>([])
   const [index, setIndex] = useState<number>(-1)
 
+  const colour = strokeStyle.colour
+
   const onDraw = (
     ctx: CanvasRenderingContext2D,
     point: Point,
     prevPoint: Point
   ) => {
-    drawLine(prevPoint, point, ctx, strokeStyle.colour, strokeStyle.strokeWidth)
+    if (
+      strokeStyle.mode === EditMode.Draw ||
+      strokeStyle.mode === EditMode.Erase
+    )
+      drawLine(prevPoint, point, ctx, strokeStyle.strokeWidth)
   }
 
   const onEndDraw = (ctx: CanvasRenderingContext2D) => {
-    endDraw(ctx)
+    if (
+      strokeStyle.mode === EditMode.Draw ||
+      strokeStyle.mode === EditMode.Erase
+    )
+      endDraw(ctx)
   }
 
   const { setCanvasRef, onMouseDown, canvasRef } = useOnDraw(onDraw, onEndDraw)
@@ -35,7 +44,7 @@ const DrawingApp = (props: Props) => {
     drawCanvas()
   }, [])
 
-  function drawCanvas() {
+  const drawCanvas = () => {
     const canvas = canvasRef.current as HTMLCanvasElement
 
     if (canvas) {
@@ -83,26 +92,43 @@ const DrawingApp = (props: Props) => {
     start: Point,
     end: Point,
     ctx: CanvasRenderingContext2D,
-    colour: string,
     width: number
   ) => {
-    ctx.globalCompositeOperation =
-      strokeStyle.mode === EditMode.Erase ? 'destination-out' : 'source-over'
-    start = start ?? end
-    ctx.beginPath()
-    ctx.lineWidth = width
-    ctx.strokeStyle = colour
-    ctx.lineCap = 'round'
-    ctx.lineJoin = 'round'
-    ctx.moveTo(start.x, start.y)
-    ctx.lineTo(end.x, end.y)
-    ctx.stroke()
+    try {
+      setMode(ctx, strokeStyle.mode)
+      start = start ?? end
+      ctx.beginPath()
+      ctx.lineWidth = width
+      ctx.strokeStyle = colour
+      ctx.fillStyle = colour
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      ctx.moveTo(start.x, start.y)
+      ctx.lineTo(end.x, end.y)
+      ctx.stroke()
+    } catch (e: any) {
+      console.log(e.message)
+    }
+  }
+
+  const setMode = (ctx: CanvasRenderingContext2D, mode: EditMode) => {
+    switch (mode) {
+      case EditMode.Draw:
+        ctx.globalCompositeOperation = 'source-over'
+        break
+      case EditMode.Erase:
+        ctx.globalCompositeOperation = 'destination-out'
+        break
+      case EditMode.Select:
+        break
+      default:
+        break
+    }
   }
 
   const endDraw = (ctx: CanvasRenderingContext2D) => {
     ctx.stroke()
     ctx.closePath()
-
     if (canvasRef.current && ctx) {
       const imageData = ctx.getImageData(
         0,
@@ -186,21 +212,26 @@ const DrawingApp = (props: Props) => {
       if (ctx) ctx.putImageData(restoreArray[index - 1], 0, 0)
     }
   }
+
   return (
     <>
       <div className="box">
         <div id="canvas-background" className="show">
           <div id="background-hider">
-            <Canvas onMouseDown={onMouseDown} setCanvasRef={setCanvasRef} />
+            <Canvas
+              onMouseDown={onMouseDown}
+              setCanvasRef={setCanvasRef}
+              id="canvas-area"
+            />
           </div>
         </div>
         <div className="playground-buttons">
           <button className="playground-btn" onClick={() => getImage()}>
             download
           </button>
-          <button className="playground-btn" onClick={undoLast}>
+          {/* <button className="playground-btn" onClick={undoLast}>
             Undo
-          </button>
+          </button> */}
           <button className="playground-btn" onClick={clearCanvas}>
             Clear
           </button>

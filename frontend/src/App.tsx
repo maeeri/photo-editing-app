@@ -7,14 +7,16 @@ import { useEffect, useState } from 'react'
 import UploadImagePage from 'components/UploadImagePage'
 import SignUpSignInPage from 'components/SignUpSignInPage'
 import Editor from 'components/Editor'
-import userService from 'services/user'
+import { useUserService, useItemService } from 'hooks/useServer'
 import Playground from 'components/Playground'
-import itemService from 'services/item'
 
 function App() {
   const [background, setBackground] = useState('')
   const [textColour, setTextColour] = useState('')
   const [user, setUser] = useState({ username: '', id: '', name: '', role: '' })
+
+  const [userService] = useUserService()
+  const [itemService] = useItemService()
 
   const navigate = useNavigate()
 
