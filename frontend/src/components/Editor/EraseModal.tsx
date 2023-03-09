@@ -18,6 +18,7 @@ const EraseModal = (props: Props) => {
       <Modal.Title></Modal.Title>
       <Modal.Body>
         <Form>
+          <div>set width</div>
           <Slider
             min={1}
             max={100}

@@ -1,5 +1,8 @@
 import * as htmlToImage from 'html-to-image'
 import FileSaver from 'file-saver'
+import DrawingApp from './DrawingApp'
+import { StrokeStyle, EditMode } from 'types'
+import { useState } from 'react'
 
 type Props = {
   item: {
@@ -9,10 +12,14 @@ type Props = {
     filter: string
   }
   resetOptions: () => void
+  strokeStyle: StrokeStyle
 }
+
+
 
 const ImageArea = (props: Props) => {
   const { item, style, resetOptions } = props
+
   const img = document.getElementById('img')
 
   const downloadImage = async () => {
@@ -25,20 +32,7 @@ const ImageArea = (props: Props) => {
   return (
     <>
       <div id="img" className="main-img-container">
-        <img
-          className="main-img"
-          src={item.image}
-          alt="editable"
-          style={style}
-        />
-      </div>
-      <div className="open-img-btn">
-        <button className="edit-area-btn" onClick={downloadImage}>
-          download image
-        </button>
-        <button className="edit-area-btn" onClick={resetOptions}>
-          reset
-        </button>
+        <DrawingApp resetOptions={resetOptions} style={style} strokeStyle={props.strokeStyle} image={item.image} />
       </div>
     </>
   )

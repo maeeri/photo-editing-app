@@ -4,6 +4,7 @@ import SignUp from './SignUp'
 import 'css/forms.css'
 import 'css/signup.css'
 import VisibilityToggler from 'components/VisibilityToggler'
+import { useEffect } from 'react'
 
 type Props = {
   user: User
@@ -11,24 +12,30 @@ type Props = {
 }
 
 const SignUpSignInPage = (props: Props) => {
+  useEffect(() => {}, [])
+
+  const signinElement = document.getElementById('signin') as HTMLElement
+  const signupElement = document.getElementById('signup') as HTMLElement
+  console.log(signupElement, signinElement)
+
   return (
     <div className="container signup-container">
       <div className="buttons">
         <VisibilityToggler
-          elementToShow={document.getElementById('signin') as HTMLElement}
-          elementToHide={document.getElementById('signup') as HTMLElement}
+          elementToShow={signinElement}
+          elementToHide={signupElement}
           id="signin-button"
           label="sign in"
         />
         <VisibilityToggler
-          elementToShow={document.getElementById('signup') as HTMLElement}
-          elementToHide={document.getElementById('signin') as HTMLElement}
+          elementToShow={signupElement}
+          elementToHide={signinElement}
           id="signup-button"
           label="sign up"
         />
       </div>
       <div className="form-container">
-        <div className="box signin hide" id="signin">
+        <div className="box signin show" id="signin">
           <SignIn setUser={props.setUser} />
         </div>
         <div className="box signup hide" id="signup">

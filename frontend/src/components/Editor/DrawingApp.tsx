@@ -8,11 +8,15 @@ import Canvas from './Canvas'
 
 type Props = {
   strokeStyle: StrokeStyle
-  image?: string
+  image: string
+  style: {
+    filter: string
+  }
+  resetOptions: () => void
 }
 
 const DrawingApp = (props: Props) => {
-  const { strokeStyle, image } = props
+  const { strokeStyle, image, style, resetOptions } = props
   const [restoreArray, setRestoreArray] = useState<ImageData[]>([])
   const [index, setIndex] = useState<number>(-1)
 
@@ -43,16 +47,23 @@ const DrawingApp = (props: Props) => {
   useEffect(() => {
     drawCanvas()
   }, [])
-  const drawCanvas = () => {
+
+  const drawCanvas = async () => {
     const canvas = canvasRef.current as HTMLCanvasElement
 
     if (canvas) {
       canvas.width = window.innerWidth * 0.7
       canvas.height = window.innerHeight * 0.7
-      
 
-      if (image) {
-        const img = createImgElement(image)
+      if (canvas && image) {
+        const img = await createImgElement(image)
+
+        if (img.width > canvas.width) img.width = canvas.width
+        else canvas.width = img.width
+
+        if (img.height > canvas.height) img.height = canvas.height
+        else canvas.height = img.height
+
         const { width, height, marginLeft, marginTop } =
           img.width && img.height
             ? getResizedDimensions(
@@ -152,10 +163,18 @@ const DrawingApp = (props: Props) => {
       })
   }
 
-  const createImgElement = (imgUrl: string): HTMLImageElement => {
-    const img = document.createElement('img')
+  const undoDraw = () => {
+    const ctx = canvasRef.current?.getContext('2d')
+    const newArray = restoreArray.slice(0, -1)
+    setRestoreArray(newArray)
+    console.log(restoreArray)
+  }
+
+  const createImgElement = async (imgUrl: string) => {
+    const img = await document.createElement('img')
     img.src = imgUrl
     img.classList.add('canvas-image')
+    img.classList.add('main-img')
     img.id = 'created-img'
     img.crossOrigin = 'Anonymous'
     return img
@@ -186,17 +205,15 @@ const DrawingApp = (props: Props) => {
   }
 
   const clearCanvas = () => {
+    resetOptions()
     if (canvasRef.current?.width && canvasRef.current.height) {
       const ctx = canvasRef.current.getContext('2d')
       if (ctx) {
-        ctx.fillStyle = 'rgb(255, 255, 255, 0)'
-        ctx.clearRect(0, 0, canvasRef.current?.width, canvasRef.current?.height)
-        ctx.fillRect(0, 0, canvasRef.current?.width, canvasRef.current?.height)
-
         setRestoreArray([])
         setIndex(-1)
         drawCanvas()
       }
+      console.log(restoreArray)
     }
   }
 
@@ -206,18 +223,22 @@ const DrawingApp = (props: Props) => {
         <div id="canvas-background" className="show">
           <div id="background-hider">
             <Canvas
+              style={style}
               onMouseDown={onMouseDown}
               setCanvasRef={setCanvasRef}
               id="canvas-area"
             />
           </div>
         </div>
-        <div className="playground-buttons">
+        <div className="open-img-btn">
           <button className="playground-btn" onClick={() => getImage()}>
             download
           </button>
-          <button className="playground-btn" onClick={clearCanvas}>
-            Clear
+          {/* <button className="edit-area-btn" onClick={undoDraw}>
+            undo
+          </button> */}
+          <button className="edit-area-btn" onClick={clearCanvas}>
+            reset
           </button>
           <TogglerButton
             element={document.getElementById('background-hider') as HTMLElement}
@@ -231,7 +252,10 @@ const DrawingApp = (props: Props) => {
 const TogglerButton = (props: any) => {
   const [show, setShow] = useState(false)
   const element = props.element
+  console.log(element)
   const toggleBackground = () => {
+    console.log(element.style.background)
+
     if (element.style.background === 'white') {
       element.style.background = ''
       setShow(false)
@@ -240,7 +264,7 @@ const TogglerButton = (props: any) => {
       setShow(true)
     }
   }
-  const label = show ? 'Show transparency' : 'Hide transparency'
+  const label = show ? 'show transparency' : 'hide transparency'
 
   return (
     <button className="playground-btn" onClick={toggleBackground}>

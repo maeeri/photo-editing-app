@@ -55,8 +55,7 @@ const GenerateImagePage = (props: Props) => {
           />
         </div>
       </div>
-      <div className="show-area box">
-        <Loader show={showSpinner} />
+      {imageUrls.length > 0 && <div className="show-area box">
         {!showSpinner && (
           <ShowArea
             imgUrls={imageUrls}
@@ -64,7 +63,8 @@ const GenerateImagePage = (props: Props) => {
             saveImageToDb={saveImageToDb}
           />
         )}
-      </div>
+      </div>}
+      <Loader show={showSpinner} />
     </div>
   )
 }

@@ -38,6 +38,8 @@ function App() {
     checkBackgroundColour()
     checkTextColour()
     getUser()
+    // for testing purposes:
+    // window.localStorage.removeItem('openaiuser')
   }, [bg, body, txt])
 
   const checkBackgroundColour = () => {

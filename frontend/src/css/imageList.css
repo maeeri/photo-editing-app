@@ -5,12 +5,15 @@
 .image-list {
   margin-top: 3em;
   display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  grid-auto-rows: 300px;
 }
 
 .list-img {
   max-width: 200px;
   max-height: 200px;
-  display: inline-block;
 }
 
 .image-link-container {

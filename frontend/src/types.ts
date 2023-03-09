@@ -43,7 +43,12 @@ export interface ModalProps {
 }
 
 export interface StrokeStyle {
-  strokeWidth: number
-  colour: string
+  draw: Style,
+  erase: Style,
   mode: EditMode
+}
+
+export interface Style {
+  strokeWidth: number
+  colour?: string
 }

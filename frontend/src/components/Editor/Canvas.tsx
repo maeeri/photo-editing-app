@@ -2,13 +2,17 @@ type Props = {
   id?: string
   onMouseDown: () => void
   setCanvasRef: (ref: any) => void
+  style: {
+    filter: string
+  }
 }
 
 const Canvas = (props: Props) => {
-  const { id, onMouseDown, setCanvasRef } = props
+  const { id, onMouseDown, setCanvasRef, style } = props
   return (
     <canvas
-      className="show"
+      style={style}
+      className="show main-img"
       id={id}
       onMouseDown={onMouseDown}
       ref={setCanvasRef}

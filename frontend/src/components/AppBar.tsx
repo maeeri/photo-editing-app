@@ -15,7 +15,7 @@ type Props = {
 const AppBar = (props: Props) => {
   const { user, signout } = props
 
-  const style = {width: window.innerWidth}
+  const style = { width: window.innerWidth }
 
   return (
     <Navbar
@@ -27,7 +27,10 @@ const AppBar = (props: Props) => {
       sticky="top"
       style={style}
     >
-      <Navbar.Toggle className='navbar-toggler' aria-controls="reaponsive-navbar-nav" />
+      <Navbar.Toggle
+        className="navbar-toggler"
+        aria-controls="reaponsive-navbar-nav"
+      />
       <div className="appbar-container">
         <Navbar.Collapse id="responsive-navbar-nav">
           <div className="navitem">

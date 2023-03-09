@@ -9,6 +9,7 @@ export const getAllUsers = async (req, res) => {
 
 export const getOneUser = async (req, res) => {
   const user = await User.findById(req.params.id)
+  console.log(user)
   res.json(user)
 }
 

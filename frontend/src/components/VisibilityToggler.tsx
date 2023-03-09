@@ -7,7 +7,7 @@ type Props = {
 
 const VisibilityToggler = (props: Props) => {
   const { elementToShow, elementToHide, id, label } = props
-
+  console.log(elementToShow)
   const toggleVisibility = () => {
     if (elementToShow && elementToHide) {
       elementToShow.classList.remove('hide')

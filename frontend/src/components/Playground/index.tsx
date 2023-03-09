@@ -7,8 +7,13 @@ import { EditMode, StrokeStyle } from 'types'
 import DrawingApp from './DrawingApp'
 
 const STROKE_STYLE: StrokeStyle = {
-  colour: '#000000',
-  strokeWidth: 5,
+  draw: {
+    colour: '#000000',
+    strokeWidth: 5,
+  },
+  erase: {
+    strokeWidth: 5,
+  },
   mode: EditMode.Draw,
 }
 
@@ -20,9 +25,14 @@ const Playground = () => {
   const [showEraseModal, setShowEraseModal] = useState(false)
   const [selectedOptionsIndex, setSelectedOptionsIndex] = useState(0)
 
-  const setColour = (value: string) => setStyle({ ...style, colour: value })
-  const setStrokeWidth = (value: number) =>
-    setStyle({ ...style, strokeWidth: value })
+  const setColour = (value: string) =>
+    setStyle({ ...style, draw: { ...style.draw, colour: value } })
+  const setStrokeWidth = (value: number) => {
+    if (style.mode === EditMode.Draw)
+      setStyle({ ...style, draw: { ...style.draw, strokeWidth: value } })
+    else if (style.mode === EditMode.Erase)
+      setStyle({ ...style, erase: { strokeWidth: value } })
+  }
   const setMode = (value: EditMode) => {
     setStyle({ ...style, mode: value })
   }
@@ -67,7 +77,7 @@ const Playground = () => {
       <ColourModal
         show={showColourSelectModal}
         setShow={setShowColourSelectModal}
-        style={style}
+        style={style.draw}
         setColour={setColour}
         setStrokeWidth={setStrokeWidth}
       />
@@ -75,7 +85,7 @@ const Playground = () => {
         show={showEraseModal}
         setShow={setShowEraseModal}
         setStrokeWidth={setStrokeWidth}
-        style={style}
+        style={style.erase}
       />
     </div>
   )
