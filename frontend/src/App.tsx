@@ -124,7 +124,7 @@ function App() {
         {user.id && (
           <Route path="/edit/:id" element={<Editor token={token} />} />
         )}
-        {user.id && <Route path="/playground" element={<Playground />} />}
+        {/* {user.id && <Route path="/playground" element={<Playground />} />} */}
       </Routes>
     </div>
   )

@@ -60,13 +60,13 @@ const AppBar = (props: Props) => {
               </Link>
             </div>
           )}
-          {user.id && (
+          {/* {user.id && (
             <div className="navitem">
               <Link className="navlink" to="/playground">
                 playground
               </Link>
             </div>
-          )}
+          )} */}
           {user.id && (
             <div className="navitem">
               <button onClick={signout} className="nav-btn">

@@ -13,7 +13,7 @@ type Props = {
   token: string
 }
 
-const DEFAULT_OPTIONS = [
+const DEFAULT_EDIT_OPTIONS = [
   {
     name: 'Brightness',
     property: 'brightness',
@@ -97,12 +97,12 @@ const STROKE_STYLE: StrokeStyle = {
   mode: EditMode.Draw,
 }
 
-const DRAW_OPTIONS = ['Draw', 'Erase', 'Select']
+const DEFAULT_DRAW_OPTIONS = ['Draw', 'Erase', 'Select']
 
 const Editor = (props: Props) => {
   const [item, setItem] = useState({ id: '', image: '' })
-  const [editOptions, setEditOptions] = useState(DEFAULT_OPTIONS)
-  const [drawOptions, setDrawOptions] = useState(DRAW_OPTIONS)
+  const [editOptions, setEditOptions] = useState(DEFAULT_EDIT_OPTIONS)
+  const [drawOptions, setDrawOptions] = useState(DEFAULT_DRAW_OPTIONS)
   const [selectedEditOptionsIndex, setSelectedEditOptionsIndex] = useState(0)
   const [selectedDrawOptionsIndex, setSelectedDrawOptionsIndex] = useState(0)
   const [showColourSelectModal, setShowColourSelectModal] = useState(false)
@@ -168,7 +168,7 @@ const Editor = (props: Props) => {
   }, [id, item.image, props.token])
 
   const resetOptions = () => {
-    setEditOptions(DEFAULT_OPTIONS)
+    setEditOptions(DEFAULT_EDIT_OPTIONS)
   }
 
   const handleSliderChange = ({ target }: any) => {
@@ -209,7 +209,7 @@ const Editor = (props: Props) => {
         </div>
         <div className="draw-sidebar">
           <Sidebar
-            options={DRAW_OPTIONS}
+            options={drawOptions}
             selectedOptionsIndex={selectedDrawOptionsIndex}
             setSelectedOptionsIndex={(n) => setSelectedDrawOption(n)}
           />

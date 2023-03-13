@@ -12,12 +12,12 @@ type Props = {
 
 const ImageLink = (props: Props) => {
   const { item, token } = props
-
   const [itemService] = useItemService()
 
   const removeItem = async () => {
-    if (window.confirm('Are you sure you want to delete this image?'))
+    if (window.confirm('Are you sure you want to delete this image?')) {
       await itemService.deleteItem(item.id, token)
+    }
   }
 
   return (

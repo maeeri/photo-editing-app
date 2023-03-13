@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ImageFormValues } from '../types'
+import { ImageFormValues, ImageEditValues } from '../types'
 
 export const useOpenAI = () => {
   const baseurl = 'http://localhost:5000/openai'
@@ -8,7 +8,12 @@ export const useOpenAI = () => {
     return response.data.data
   }
 
-  const service = { generateImage }
+  const editImage = async (imgReq: ImageEditValues) => {
+    const response = await axios.post(`${baseurl}/editimage`, imgReq)
+    return response.data.data
+  }
+
+  const service = { generateImage, editImage }
 
   return [service]
 }

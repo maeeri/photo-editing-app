@@ -4,6 +4,11 @@ export interface ImageFormValues {
   size: Size
 }
 
+export interface ImageEditValues extends ImageFormValues {
+  image: string
+  mask: string
+}
+
 export enum Size {
   Small = 'small',
   Medium = 'medium',

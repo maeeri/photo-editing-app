@@ -12,19 +12,19 @@ type Props = {
   setItems: (values: any) => void
 }
 
-const dummyImage = [
-  {
-    id: '1',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Blank_Square.svg/768px-Blank_Square.svg.png',
-  },
-]
-
 const ImageList = (props: Props) => {
   const user = window.localStorage.getItem('openaiuser')
   const token = user ? JSON.parse(user).token : null
   const { items, setItems } = props
   const [itemService] = useItemService()
+
+  const dummyImage = [
+    {
+      id: '1',
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Blank_Square.svg/768px-Blank_Square.svg.png',
+    },
+  ]
 
   useEffect(() => {
     async function getItems() {
