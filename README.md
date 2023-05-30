@@ -34,6 +34,12 @@
     4. Start the client:
        Run 'npm start' in the client folder terminal
     5. Get developing
+    
+<img width="640" alt="image" src="https://github.com/maeeri/OpenAIApp/assets/107042762/c6c4c7b7-4523-400f-bd2a-7a71515aed0f">
+<img width="640" alt="image" src="https://github.com/maeeri/OpenAIApp/assets/107042762/c7e6c613-049c-4edd-897a-d645a4bb036a">
+<img width="649" alt="image" src="https://github.com/maeeri/OpenAIApp/assets/107042762/0bd521c5-3bad-4047-abcf-ad653876cceb">
+<img width="641" alt="image" src="https://github.com/maeeri/OpenAIApp/assets/107042762/398a8978-1015-4e36-a675-6b42ff601e9a">
+
 
 ### Resources
 
